@@ -1,7 +1,7 @@
 <template>
   <div class="home">
       <h1>Version:{{this.$store.state.version}}</h1>
-      <h1>Count: {{this.$store.state.counter.count}}</h1>
+      <h1>Count: {{count}}</h1>
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
   </div>
@@ -12,20 +12,22 @@ import { Component, Vue } from 'vue-property-decorator';
 import store from '@/store/store';
 
 import {getModule} from 'vuex-module-decorators'
-import Counter2 from '@/store/Counter2'
-
-const counterModule = getModule(Counter2.prototype)
+import CounterModule from '@/store/Counter2'
 
 
 @Component
 export default class Home extends Vue {
 
+ get count() {
+    return CounterModule.count
+  }
+
 increment(){
-  counterModule.incr();
+   CounterModule.incr();
 }
 
 decrement(){
-  counterModule.decr();
+  CounterModule.decr();
 }
 
 }
